@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>晴空派送局 · 特别派件行动</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%23ffd979'/%3E%3Cpath d='M7 12h18v13H7zm4-5h10v6H11z' fill='%23454b59'/%3E%3Cpath d='M11 16h3m4 0h3' stroke='%23fff7e5' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="shell">
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="晴空派送局主页"><svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="15" fill="#FFD679"/><path d="M12 20h24v17H12zM18 11h12v10H18z" fill="#46505D"/><path d="M18 26h3m6 0h3" stroke="#fff9ed" stroke-width="3" stroke-linecap="round"/><path d="M22 32h4" stroke="#fff9ed" stroke-width="2"/><path d="M8 26h4m24 0h4" stroke="#46505D" stroke-width="3"/></svg><span>晴空派送局<small>SUNNY DELIVERY CLUB</small></span></a>
+    <nav class="nav-label"><span class="nav-active">特别派件行动</span><span>第 007 号驾驶员</span></nav>
+    <div class="top-actions"><button id="preferences" class="utility">体验设置</button><button id="sound" class="utility" aria-label="开启声音">声音 OFF</button><button id="fullscreen" class="utility">全屏游玩</button></div>
+  </header>
+  <section class="page-heading"><div><div class="eyebrow">A SMALL ROBOT. A VERY BIG DELIVERY.</div><h1>今天，也要把快乐送达。</h1></div><div class="hand-note">天气晴，适合拯救世界。<svg viewBox="0 0 38 25" aria-hidden="true"><path d="M2 3c5 17 24 15 30 8m-9-2 11 0-3 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div></section>
+  <section class="workspace">
+    <div class="game-column">
+      <div class="telemetry">
+        <div class="health-block"><span class="tiny-label">机甲电量</span><div class="health-row"><div class="health-track"><i id="health-fill"></i></div><strong id="health-text">100<span> / 100</span></strong></div></div>
+        <div class="metric"><span class="tiny-label">配送站点</span><strong id="wave-text">01 <span>/ 12</span></strong></div>
+        <div class="metric score"><span class="tiny-label">好评积分</span><strong id="score-text">000000</strong></div>
+        <button id="pause" class="pause-button" aria-label="暂停游戏" disabled><svg width="12" height="16" viewBox="0 0 12 16" aria-hidden="true"><path d="M2 2v12M10 2v12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="viewport" id="viewport">
+        <canvas id="arena" width="1200" height="760" aria-label="晴空派送局机甲战场。WASD移动，鼠标射击，空格冲刺，E回放分身，Q子弹退件。" tabindex="0"></canvas>
+        <div class="corner-label top-left" id="zone-label">SUNNY DISTRICT / 01</div><div class="corner-label top-right" id="seed-label">100% 好心情供电</div>
+        <button id="leave-practice" class="leave-practice hidden">试驾结束，返回首页</button><div id="wave-banner" class="banner hidden"></div>
+        <div id="boss-hud" class="boss-hud hidden"><span id="boss-name">主管到场</span><div><i id="boss-fill"></i></div></div>
+        <div class="screen intro-screen" id="intro">
+          <div class="intro-copy"><span class="pill">独立派件员招募中</span><p class="hero-title">包裹要准时，<br><span>世界顺便救。</span></p><p class="hero-desc">驾驶纸箱机甲，闯过 12 个奇怪街区。<br>复印自己、退回弹幕，让失控的机器人集体下班。</p><div class="start-actions"><button id="start" class="primary">开始派件 <svg viewBox="0 0 28 20" width="27" aria-hidden="true"><path d="M2 10h22M17 3l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button id="practice" class="continue-button">先试驾驶</button><button id="continue" class="continue-button hidden">继续上次派送</button></div><p class="start-hint"><button id="mode-label" class="mode-pill">悠闲派送</button> WASD 移动 · 鼠标瞄准射击</p></div>
+          <div class="mech-tag"><span class="tag-dot"></span><span>小黄 / 员工编号 007<small>看起来是纸箱，其实很能打。</small></span></div>
+          <div class="intro-bottom"><span><b>12</b> 奇妙站点</span><span><b>02</b> 难缠主管</span><span><b>∞</b> 好心情</span><span class="offline-label">离线也营业</span></div>
+        </div>
+        <div class="screen modal-screen hidden" id="pause-screen"><div class="modal"><span class="pill">TEA BREAK</span><h2>摸鱼时间到。</h2><p>整个世界都会等你喝完这杯茶。</p><button id="resume" class="primary">继续营业 <span>→</span></button><button id="pause-preferences" class="text-button">调整难度与操作体验</button><button id="back-home" class="text-button">返回首页 · 下次从本站起点继续</button><button id="restart-paused" class="text-button">重新开始本次派送</button></div></div>
+        <div class="screen modal-screen hidden" id="upgrade-screen"><div class="upgrade-modal"><span class="pill">员工福利 · 三选一</span><h2>这次，给机甲加点料。</h2><p id="upgrade-intro">派件完成！恢复 20 点电量，领取一项永久改装。</p><div id="station-receipt" class="station-receipt"></div><div id="upgrade-cards"></div><small>点击卡片，或按键盘 1 / 2 / 3 领取</small></div></div>
+        <div class="screen modal-screen hidden" id="end-screen"><div class="modal"><span class="pill" id="end-label">今日营业报告</span><h2 id="end-title">先下班，再出发。</h2><p id="end-copy"></p><div class="result-grid"><div><small>好评积分</small><strong id="final-score">0</strong></div><div><small>回收机甲 / 用时</small><strong id="final-stats">0 / 0:00</strong></div></div><button id="restart" class="primary">再开一单 <span>→</span></button><button id="retry" class="text-button hidden">从本站重试（保留改装）</button><div class="best-line" id="best-line"></div><button id="end-home" class="text-button">返回首页</button></div></div>
+        <div id="coach" class="coach hidden"><div><span class="coach-label">随手学一招</span><span id="coach-copy"></span></div><button id="coach-dismiss" aria-label="收起操作引导">收起</button></div>
+        <div id="feedback-toast" class="feedback-toast hidden" role="status" aria-live="polite"></div>
+        <div id="settings-screen" class="screen modal-screen hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+          <div class="settings-panel"><div class="settings-heading"><div><span class="eyebrow">MAKE YOURSELF COMFORTABLE</span><h2 id="settings-title">按你的节奏来。</h2></div><button id="close-settings" class="utility">完成</button></div>
+            <fieldset class="difficulty-picker"><legend>今天想怎么派送？</legend><label><input type="radio" name="difficulty" value="cozy" checked><span><strong>悠闲派送</strong><small>受伤更轻、弹幕更慢，同时出场敌机更少。</small></span></label><label><input type="radio" name="difficulty" value="standard"><span><strong>标准派送</strong><small>原版伤害与速度，适合想认真练走位的你。</small></span></label></fieldset>
+            <label class="setting-row"><span><strong>辅助瞄准</strong><small>只微调准星附近的目标，瞄准方向仍由你决定。</small></span><input id="setting-aim" type="checkbox" checked></label>
+            <label class="setting-row"><span><strong>柔和动效</strong><small>关闭镜头震动与闪烁，减少飞溅粒子。</small></span><input id="setting-motion" type="checkbox" checked></label>
+            <label class="setting-row"><span><strong>操作引导</strong><small>第一站按操作逐步提示，可随时收起。</small></span><input id="setting-hints" type="checkbox" checked></label>
+            <label class="setting-row"><span><strong>显示伤害数字</strong><small>喜欢更干净的战场，可以保持关闭。</small></span><input id="setting-numbers" type="checkbox"></label>
+            <label class="setting-row volume-row"><span><strong>音效音量</strong><small id="volume-label">35%</small></span><input id="setting-volume" type="range" min="0" max="100" step="5" value="35" aria-label="音效音量"></label>
+            <p class="settings-note">设置立即生效并保存在本机。战斗中打开设置会暂停，关闭后可按“继续营业”。</p>
+          </div>
+        </div>
+        <div class="touch-notice">请使用电脑键盘和鼠标游玩</div>
+      </div>
+      <div class="status-bar">
+        <button id="ability-dash" class="ability" title="空格：短暂冲刺并免疫伤害"><kbd>SPACE</kbd><span class="ability-copy"><span class="ability-heading">冲刺闪避 <small id="dash-status">就绪</small></span><span class="ability-track"><i id="dash-fill"></i></span></span></button>
+        <button id="ability-echo" class="ability" title="E：重放过去最多4秒的移动与开火"><kbd>E</kbd><span class="ability-copy"><span class="ability-heading">回放分身 <small id="echo-status">就绪</small></span><span class="ability-track echo"><i id="echo-fill"></i></span></span></button>
+        <button id="ability-pulse" class="ability" title="Q：附近敌弹变为追踪纸飞机，并击退敌人"><kbd>Q</kbd><span class="ability-copy"><span class="ability-heading">纸飞机退件 <small id="pulse-status">就绪</small></span><span class="ability-track pulse"><i id="pulse-fill"></i></span></span></button>
+        <span id="battle-status" class="battle-status">准备好快乐出发了吗？</span>
+      </div>
+    </div>
+    <aside class="sidebar">
+      <section class="route-card"><div class="section-label"><span>本次配送路线</span><span class="small-pill">12 站</span></div><div class="route-title"><h2 id="level-title">第一单，别紧张</h2><span class="route-number" id="route-number">01</span></div><p id="level-desc">阳光广场已就绪。失控机甲有点多，但今天的你一定没问题。</p><div id="delivery-card" class="delivery-card hidden"><svg viewBox="0 0 32 32" width="30" aria-hidden="true"><path d="m4 11 12-6 12 6v16H4z" fill="#f4cd86" stroke="#ac9469" stroke-width="1.5"/><path d="m4 11 12 5 12-5M16 16v11M11 8l12 6" fill="none" stroke="#ac9469" stroke-width="1.5"/></svg><div><strong id="delivery-title">顺路派件</strong><span id="delivery-detail">接近包裹，带回中央邮筒</span></div><span id="delivery-badge">可选</span></div><div class="wave-steps" id="wave-steps"></div><div class="route-bottom"><span id="objective">目标：清理本站所有失控机甲</span><span id="progress-text">0 / 12</span></div></section>
+      <section class="trick-card"><div class="section-label">本局的不科学技巧</div><div class="trick"><span class="trick-letter mint">E</span><div><strong>让过去的自己代班</strong><p>回放过去 4 秒的走位和射击。<br>一个你走位，另一个你输出。</p></div></div><div class="trick"><span class="trick-letter peach">Q</span><div><strong>子弹？拒收，原路退回。</strong><p>附近弹幕折成友方纸飞机，<br>自动追踪敌人，顺便击退它们。</p></div></div></section>
+      <section class="loadout-card"><div class="section-label"><span>007 的改装小本本</span><span id="upgrade-count">0 件</span></div><div class="weapon"><svg viewBox="0 0 64 42" width="64" aria-hidden="true"><rect x="5" y="14" width="38" height="18" rx="6" fill="#fac66e" stroke="#514d42" stroke-width="2"/><rect x="38" y="18" width="20" height="9" rx="3" fill="#b5dcd6" stroke="#514d42" stroke-width="2"/><path d="M14 14V8h18v6m-15 5v8m7-8v8" fill="none" stroke="#514d42" stroke-width="2"/></svg><div><strong>快乐打孔机</strong><span id="weapon-stats">伤害 24 · 6.2 发 / 秒</span></div></div><div id="installed-upgrades" class="installed"><span>暂时原装，也很有力量。</span></div></section>
+      <div class="record"><span>历史最高好评</span><strong id="best-score">000000</strong><span class="record-stamp">GOOD<br>JOB!</span></div>
+      <div class="tip-note"><span>驾驶员小贴士</span><p id="tip-text">冲刺时短暂无敌。<br>打不过的时候，理直气壮地溜。</p></div>
+    </aside>
+  </section>
+  <footer><div class="controls"><span><kbd>W A S D</kbd> 移动</span><span><kbd>鼠标</kbd> 瞄准 / 开火</span><span><kbd>F</kbd> 自动开火</span><span><kbd>ESC</kbd> 暂停</span></div><span class="footer-note">小小机甲，大大世界。<span class="sun-doodle">☀</span> HAVE A SUNNY DAY</span></footer>
+</main>
+<script src="engine.js"></script><script src="game.js"></script>
+</body>
+</html>

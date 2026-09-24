@@ -1,0 +1,14 @@
+{
+  "name": "sunny-delivery-club",
+  "version": "1.2.0",
+  "private": true,
+  "description": "明亮、离线、零依赖的机甲快递小游戏",
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node --test tests/engine.test.cjs",
+    "build": "node build.cjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
